@@ -5,6 +5,7 @@ import os
 import re
 from typing import Dict, Iterable, List, Tuple
 
+import google.auth.exceptions
 from appdirs import AppDirs
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -103,9 +104,17 @@ class Spreadsheet:
         )
 
         if not creds or not creds.valid:
+            is_authenticated = False
+
             if creds and creds.expired and creds.refresh_token:
-                creds.refresh(Request())
-            else:
+                try:
+                    creds.refresh(Request())
+                except google.auth.exceptions.RefreshError:
+                    logger.exception("Could not use refresh token")
+                else:
+                    is_authenticated = True
+
+            if not is_authenticated:
                 flow = InstalledAppFlow.from_client_secrets_file(
                     self.credentials_path, SCOPES
                 )
