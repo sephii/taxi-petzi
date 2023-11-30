@@ -1,3 +1,29 @@
+[project]
+name = "taxi_petzi"
+description = "Taxi backend for Petzi"
+authors = [
+    {name = "Sylvain Fankhauser", email = "sephi@fhtagn.top"},
+]
+readme = "README.md"
+requires-python = ">=3.7"
+dynamic = ["version"]
+dependencies = [
+    "google-api-python-client",
+    "google-auth-httplib2",
+    "google-auth-oauthlib",
+    "taxi>=6.1.0",
+]
+
+[project.urls]
+Source = "https://github.com/sephii/taxi-petzi"
+
+[project.entry-points."taxi.backends"]
+petzi = "taxi_petzi.backend:PetziBackend"
+
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
 [tool.black]
 target-version = ['py37']
 include = '\.pyi?$'

@@ -33,19 +33,19 @@ To setup a development environment, create a virtual environment and run the
 following command in it:
 
 ``` sh
-pip install -e .
+python3 -m pip install -e .
 ```
 
 To use a specific version of Taxi, eg. if you need to also make changes to Taxi,
 install it in the virtual environment in editable mode:
 
 ``` sh
-pip install -e /path/to/taxi
+python3 -m pip install -e /path/to/taxi
 ```
 
 To run the tests, install the test requirements, and then run the `pytest` command:
 
 ``` sh
-pip install -r requirements_test.txt
+python3 -m pip install -r requirements_test.txt
 pytest
 ```
